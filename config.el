@@ -73,6 +73,7 @@
    )
   (:prefix ("t" . "toggle")
    :desc "whitespace-mode" "s" 'global-whitespace-mode
+   ;; "rgb" 모듈이 아닌 이 설정파일에 포함된 기능
    :desc "rainbow-delimiters-mode" "R" 'rainbow-delimiters-mode
    )
   ))
@@ -255,9 +256,16 @@
 (evil-define-key 'insert term-raw-map (kbd "C-c <left>") 'evil-window-left)
 
 ;;<!-- 0038 ranger -->
-(setq ranger-show-hidden t) ;;show dot files
-(setq ranger-dont-show-binary t) ;; don't show binary
-(setq helm-descbinds-window-style 'same-window) ;; helm-descbinds 패키지와 같이 씀에 따라 생기는 문제 해결
+(after! ranger
+  (ranger-override-dired-mode t)
+  (setq ranger-show-hidden t) ;;show dot files
+  (setq ranger-dont-show-binary t) ;; don't show binary
+  (setq helm-descbinds-window-style 'same-window) ;; helm-descbinds 패키지와 같이 씀에 따라 생기는 문제 해결
+  (setq ranger-hide-cursor nil)
+  (setq ranger-width-parents 0.2)
+  (setq ranger-width-preview 0.55)
+  (setq ranger-excluded-extensions '("mkv" "iso" "mp4"))
+  )
 
 ;;<!-- 0060  Whitespace -->
 (use-package whitespace
@@ -332,7 +340,7 @@
 
 
 ;; <!-- ------------------------:START 0130  Colorize Identifiers --------------------------->
-;; https://github.com/mariusk/emacs-color
+;; ;; https://github.com/mariusk/emacs-color
 
 ;; Takes a color string like #ffe0e0 and returns a light
 ;; or dark foreground color to make sure text is readable.
@@ -433,9 +441,70 @@ Version 2016-08-09"
 ;; <!-- ------------------------:END 0130  Colorize Identifiers --------------------------->
 
 
+;; <!-- 0200 Flycheck -->
+
+(after! 'flycheck
+  (setq flycheck-javascript-eslint-executable "eslint_d")
+  (setq-default flycheck-disabled-checkers (append flycheck-disabled-checkers '(javascript-jshint)))
+  (global-flycheck-mode)
+  (flycheck-inline-mode)
+  (flycheck-add-mode 'javascript-eslint 'typescript-mode)
+  (flycheck-display-errors-delay 1)
+  ;; Workaround for eslint loading slow
+  ;; https://github.com/flycheck/flycheck/issues/1129#issuecomment-319600923
+  (advice-add 'flycheck-eslint-config-exists-p :override (lambda() t))
+  )
+(defun my/use-eslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (eslint
+          (and root
+               (expand-file-name "node_modules/.bin/eslint"
+                                 root))))
+    (when (and eslint (file-executable-p eslint))
+      (setq-local flycheck-javascript-eslint-executable eslint))))
+
+(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+
+(after! 'js2-mode
+	'(add-hook 'js2-mode-hook 'flycheck-inline-mode))
 
 
+;;<!-- 0250 lisp-mode -->
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
+
+;;<!-- 0280 Rust Development Env -->
+;; official document: http://develop.spacemacs.org/layers/+lang/rust/README.html
+;; 0) add 'rust' layer into dotspacemacs-configuration-layers
+;;;   (rust :variables
+;;;       rust-backend 'racer ;; or 'lsp
+;;;       )
+;; 1) curl https://sh.rustup.rs -sSf | sh
+;; 2) export PATH="$HOME/.cargo/bin:$PATH"
+;; 3) cargo install rustfmt
+;;;   rustup component add rustfmt --toolchain stable-x86_64-unknown-linux-gnu
+;; 4) Racer is a code completion and source code navigation tool for Rust.
+;;;   cargo install racer
+;; 5) Rust source code is needed for auto-completion so clone it somewhere:
+;;;   git clone git@github.com:rust-lang/rust.git
+;; 6) package-install flycheck-rust
+
+;; Racer 설치관련
+;; https://github.com/racer-rust/racer
+
+(defun andrwj/setup-rust-env ()
+  "Rust 개발환경 셋업"
+  (interactive)
+  ;; (add-hook 'rust-mode-hook
+  ;;           (lambda () (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
+  (setq racer-cmd "~/.cargo/bin/racer")
+  (setq racer-rust-src-path "~/Develops/Rust/9999-rust/src")
+  ;; (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+  )
+
+(add-hook 'rust-mode-hook (lambda () (setq-local tab-width 3)))
 
 
 ;; <!-------------------------------- 정리해야함 ------------------------ !>
