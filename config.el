@@ -264,7 +264,7 @@
   (setq ranger-hide-cursor nil)
   (setq ranger-width-parents 0.2)
   (setq ranger-width-preview 0.55)
-  (setq ranger-excluded-extensions '("mkv" "iso" "mp4"))
+  (setq ranger-excluded-extensions '("mkv" "iso" "mp4" "DS_Store" "zip" "tgz" "tar" "gz"))
   )
 
 ;;<!-- 0060  Whitespace -->
