@@ -158,12 +158,12 @@
 
 ;; 특정 위치내 모든 파일에 대해 바꾸기
 ;; helm-ag로 찾은 내용(버퍼) 안에서 바꾸기를 하면, 버퍼내 변경사항을 helm-ag가 모든 파일에 대해 적용되는 것임!
-;;	1) helm-do-ag 실행
-;;	2) 검색 범위 선정
-;;	3) 패턴 지정 (이때 절대 리턴 누르지 말고 C-c C-e 눌러 iedit-mode로 진입!!!)
-;;	4) helm-ag 가 표시하는 목록에서 바꾸고자 하는 부분으로 가서 블록을 잡거나 위치 시킴
-;;	5) SPC s e 를 눌러 문자열 치환
-;;	6) C-c C-c 눌러 적용
+;; 1) helm-do-ag 실행
+;; 2) 검색 범위 선정
+;; 3) 패턴 지정 (이때 절대 리턴 누르지 말고 C-c C-e 눌러 iedit-mode로 진입!!!)
+;; 4) helm-ag 가 표시하는 목록에서 바꾸고자 하는 부분으로 가서 블록을 잡거나 위치 시킴
+;; 5) SPC s e 를 눌러 문자열 치환
+;; 6) C-c C-c 눌러 적용
 
 (custom-set-variables
  ;;성능문제 때문에 follow-mode를 쓰면 Emacs가 응답하지 못하는 경우가 생긴다.
@@ -468,7 +468,7 @@ Version 2016-08-09"
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
 (after! 'js2-mode
-	'(add-hook 'js2-mode-hook 'flycheck-inline-mode))
+   '(add-hook 'js2-mode-hook 'flycheck-inline-mode))
 
 
 ;;<!-- 0250 lisp-mode -->
@@ -505,6 +505,14 @@ Version 2016-08-09"
   )
 
 (add-hook 'rust-mode-hook (lambda () (setq-local tab-width 3)))
+
+;;<!-- undo-fu -->
+;; https://gitlab.com/ideasman42/emacs-undo-fu
+(use-package undo-fu
+  :config
+     (global-undo-tree-mode -1)
+     (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
+     (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo))
 
 
 ;; <!-------------------------------- 정리해야함 ------------------------ !>

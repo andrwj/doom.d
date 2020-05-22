@@ -47,7 +47,7 @@
                                         ;(package! builtin-package :recipe (:branch "develop"))
 
 
-(package! cl :disable t)
+;; (package! cl :disable t)
 (package! aggressive-indent)
 (package! dired-narrow)
 (package! magit)
@@ -71,3 +71,4 @@
 (package! flycheck-inline)
 (package! rjsx-mode)
 (package! typescript-mode)
+(package! undo-fu)
