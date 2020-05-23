@@ -19,8 +19,8 @@
 ;; regular diminished font size, even for the childframes.
 (setq +helm-posframe-text-scale 0)
 
-;; 줄간격
-(setq-default line-spacing 4)
+;; 줄간격 (line-height)
+(setq-default line-spacing 2)
 
 ;; 리더키는 스페이스
 (defconst my-leader "SPC")
@@ -513,6 +513,21 @@ Version 2016-08-09"
      (global-undo-tree-mode -1)
      (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
      (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo))
+
+;;<!-- elfeed -->
+(global-set-key (kbd "C-x w") 'elfeed)
+(global-set-key (kbd "C-x W") 'elfeed-update)
+(setq elfeed-feeds
+      '("https://www.reddit.com/r/emacs.rss")
+      )
+
+
+;;<!-- twittering-mode -->
+;; brew install gnupg
+(use-package! twittering-mode
+  :config
+  (setq twittering-use-master-password t)
+  )
 
 
 ;; <!-------------------------------- 정리해야함 ------------------------ !>
