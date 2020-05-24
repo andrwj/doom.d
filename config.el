@@ -468,26 +468,31 @@ Version 2016-08-09"
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
 (after! 'js2-mode
-  '(add-hook 'js2-mode-hook 'flycheck-inline-mode))
+  '(add-hook 'js2-mode-hook 'flycheck-inline-mode)
+  )
 
 ;;<!-- 0220 LSP-MODE -->
 ;;https://emacs-lsp.github.io/lsp-mode/page/configuration/
 ;;https://emacs-lsp.github.io/lsp-mode/page/settings/
 ;;SPC c j -- Jump to symbol in current workspace
 ;;SPC c J -- Jump to symbol in any workspace
-(after! lsp-mode
-  (setq lsp-diagnostics-modeline-scope :project) ;;To see all error statistics in the modeline
-  (setq lsp-auto-guess-root nil) ;; ls-mode의 내부를 잘 알경우에만 사용
-  (setq lsp-enable-on-type-formatting nil)
-  (setq lsp-signature-auto-activate nil)
-  (setq lsp-enable-folding nil)
-  (setq lsp-enable-snippet nil)
-  (setq lsp-enable-completion-at-point t)
-  (setq read-process-output-max (* 1024 1024)) ;; 1mb
-  (setq lsp-idle-delay 0.5)
-  (setq lsp-prefer-capf t)
-  ;;(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact"))
-  ) ;; lsp-mode
+;; (after! lsp-mode
+(setq lsp-diagnostics-modeline-scope :project) ;;To see all error statistics in the modeline
+(setq lsp-auto-guess-root nil) ;; ls-mode의 내부를 잘 알경우에만 사용
+(setq lsp-enable-on-type-formatting nil)
+(setq lsp-signature-auto-activate nil)
+(setq lsp-enable-folding nil)
+(setq lsp-enable-snippet nil)
+(setq lsp-enable-completion-at-point t)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(setq lsp-idle-delay 0.5)
+(setq lsp-prefer-capf t)
+;;(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact"))
+(setq lsp-eslint-server-command
+      '("node"
+        "/Users/andrwj/.vscode-insiders/extensions/dbaeumer.vscode-eslint-2.1.5/server/out/eslintServer.js"
+        "--stdio"))
+;; ) ;; lsp-mode
 
 ;;<!-- 0230 Company -->
 (use-package! company
@@ -520,11 +525,6 @@ Version 2016-08-09"
 ;; (pyvenv-mode +1)
 
 ;;<!-- 0280 Rust Development Env -->
-;; official document: http://develop.spacemacs.org/layers/+lang/rust/README.html
-;; 0) add 'rust' layer into dotspacemacs-configuration-layers
-;;;   (rust :variables
-;;;       rust-backend 'racer ;; or 'lsp
-;;;       )
 ;; 1) curl https://sh.rustup.rs -sSf | sh
 ;; 2) export PATH="$HOME/.cargo/bin:$PATH"
 ;; 3) cargo install rustfmt
@@ -538,25 +538,30 @@ Version 2016-08-09"
 ;; Racer 설치관련
 ;; https://github.com/racer-rust/racer
 
-(defun andrwj/setup-rust-env ()
-  "Rust 개발환경 셋업"
-  (interactive)
-  ;; (add-hook 'rust-mode-hook
-  ;;           (lambda () (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
+(after! rust-mode
   (setq racer-cmd "~/.cargo/bin/racer")
+  ;; 디버깅을 위한 소스 위치
   (setq racer-rust-src-path "~/Develops/Rust/9999-rust/src")
-  ;; (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+  ;; 사용자 요청에 의한 포맷팅
+  (add-hook 'rust-mode-hook
+            (lambda () (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
+  ;; 저장하기전 포맷팅
+  (add-hook 'before-save-hook
+            (lambda () (when (eq 'rust-mode major-mode)
+                         (lsp-format-buffer))))
+  ;; 탭 3칸
+  (add-hook 'rust-mode-hook (lambda () (setq-local tab-width 3)))
   )
 
-(add-hook 'rust-mode-hook (lambda () (setq-local tab-width 3)))
 
 ;;<!-- undo-fu -->
 ;; https://gitlab.com/ideasman42/emacs-undo-fu
 (use-package undo-fu
   :config
-     (global-undo-tree-mode -1)
-     (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
-     (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo))
+  (global-undo-tree-mode -1)
+  (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
+  (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo))
 
 ;;<!-- elfeed -->
 (global-set-key (kbd "C-x w") 'elfeed)
