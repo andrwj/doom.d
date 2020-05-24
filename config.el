@@ -9,7 +9,7 @@
 (setq doom-font (font-spec :family "Noto Sans Mono CJK KR" :size 18 )
       doom-variable-pitch-font (font-spec :family "Noto Sans Light" :size 18)
       doom-unicode-font (font-spec :name "Noto Sans Mono CJK KR" :size 15)
-      ;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for presentations or streaming.
+      ;; use this for presentations or streaming.
       doom-big-font (font-spec :name "Noto Sans Black" :size 35)
       doom-theme 'doom-one
       )
@@ -468,12 +468,56 @@ Version 2016-08-09"
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
 (after! 'js2-mode
-   '(add-hook 'js2-mode-hook 'flycheck-inline-mode))
+  '(add-hook 'js2-mode-hook 'flycheck-inline-mode))
+
+;;<!-- 0220 LSP-MODE -->
+;;https://emacs-lsp.github.io/lsp-mode/page/configuration/
+;;https://emacs-lsp.github.io/lsp-mode/page/settings/
+;;SPC c j -- Jump to symbol in current workspace
+;;SPC c J -- Jump to symbol in any workspace
+(after! lsp-mode
+  (setq lsp-diagnostics-modeline-scope :project) ;;To see all error statistics in the modeline
+  (setq lsp-auto-guess-root nil) ;; ls-mode의 내부를 잘 알경우에만 사용
+  (setq lsp-enable-on-type-formatting nil)
+  (setq lsp-signature-auto-activate nil)
+  (setq lsp-enable-folding nil)
+  (setq lsp-enable-snippet nil)
+  (setq lsp-enable-completion-at-point t)
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb
+  (setq lsp-idle-delay 0.5)
+  (setq lsp-prefer-capf t)
+  ;;(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact"))
+  ) ;; lsp-mode
+
+;;<!-- 0230 Company -->
+(use-package! company
+  :hook (prog-mode . company-mode)
+  :config
+  (setq company-minimum-prefix-length 1)
+  (setq company-idle-delay 0)
+  (setq company-selection-wrap-around t)
+  (setq company-tooltip-align-annotations t)
+  (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
+                            company-echo-metadata-frontend))
+  (with-eval-after-load 'company
+    (define-key company-active-map (kbd "C-j") nil) ; avoid conflict with emmet-mode
+    (define-key company-active-map (kbd "C-n") #'company-select-next)
+    (define-key company-active-map (kbd "C-p") #'company-select-previous))
+  ) ;; company
 
 
 ;;<!-- 0250 lisp-mode -->
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
+
+;;<!-- 0270 Python - PyEnv -->
+;; (use-package pyvenv
+;;   :config
+;;   (setq pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
+;; (add-hook 'pyvenv-post-activate-hooks
+;;           #'(lambda ()
+;;               (call-interactively #'lsp-workspace-restart)))
+;; (pyvenv-mode +1)
 
 ;;<!-- 0280 Rust Development Env -->
 ;; official document: http://develop.spacemacs.org/layers/+lang/rust/README.html
@@ -544,17 +588,17 @@ Version 2016-08-09"
     (define-key evil-normal-state-map (kbd "C-c ]") 'next-buffer)
     ))
 
-;;; I-search
-(setq search-highlight t
-      search-whitespace-regexp ".*?"
-      isearch-lax-whitespace t
-      isearch-regexp-lax-whitespace nil
-      isearch-lazy-highlight t
-      isearch-lazy-count t
-      lazy-count-prefix-format " (%s/%s) "
-      lazy-count-suffix-format nil
-      isearch-yank-on-move 'shift
-      isearch-allow-scroll 'unlimited)
+;; ;; I-search
+;; (setq search-highlight t
+;;       search-whitespace-regexp ".*?"
+;;       isearch-lax-whitespace t
+;;       isearch-regexp-lax-whitespace nil
+;;       isearch-lazy-highlight t
+;;       isearch-lazy-count t
+;;       lazy-count-prefix-format " (%s/%s) "
+;;       lazy-count-suffix-format nil
+;;       isearch-yank-on-move 'shift
+;;       isearch-allow-scroll 'unlimited)
 
 ;; dired
 (after! dired
@@ -657,25 +701,25 @@ Version 2016-08-09"
 ;;;;;;;;;;;;;;;; Emacs confugraiton
 
 
-;; Prevents some cases of Emacs flickering
-(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+;; ;; Prevents some cases of Emacs flickering
+;; (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
 
-;; Switch to the new window after splitting
-(setq evil-split-window-below t
-      evil-vsplit-window-right t)
+;; ;; Switch to the new window after splitting
+;; (setq evil-split-window-below t
+;;       evil-vsplit-window-right t)
 
-;; Silence all that useless output
-(setq direnv-always-show-summary nil)
+;; ;; Silence all that useless output
+;; (setq direnv-always-show-summary nil)
 
-;; do not auto-complete until my sign
-(setq company-idle-delay nil)
+;; ;; do not auto-complete until my sign
+;; (setq company-idle-delay nil)
 
 ;; lsp-ui-sideline is redundant with eldoc and much more invasive, so
 ;; disable it by default.
-(setq lsp-ui-sideline-enable nil)
-(setq lsp-enable-symbol-highlighting nil)
+;; (setq lsp-ui-sideline-enable nil)
+;; (setq lsp-enable-symbol-highlighting nil)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;  OrgMode ;;;;;;;;;;;;;;;;;;;;;;;;
-(setq org-directory "~/Develops/Emacs/org-documents")
+(setq org-directory "~/.doom.d/org")

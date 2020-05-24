@@ -47,7 +47,7 @@
                                         ;(package! builtin-package :recipe (:branch "develop"))
 
 
-;; (package! cl :disable t)
+(package! coffee-mode :disable t)
 (package! aggressive-indent)
 (package! dired-narrow)
 (package! magit)
