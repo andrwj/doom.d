@@ -6,25 +6,8 @@
   )
 
 
-;;<!-- 0230 Company -->
-;; (use-package! company
-;;   :hook (prog-mode . company-mode)
-;;   :config
-;;   (setq company-minimum-prefix-length 1)
-;;   (setq company-idle-delay 0)
-;;   (setq company-selection-wrap-around t)
-;;   (setq company-tooltip-align-annotations t)
-;;   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
-;;                             company-echo-metadata-frontend))
-;;   (with-eval-after-load 'company
-;;     (define-key company-active-map (kbd "C-j") nil) ; avoid conflict with emmet-mode
-;;     (define-key company-active-map (kbd "C-n") #'company-select-next)
-;;     (define-key company-active-map (kbd "C-p") #'company-select-previous))
-;;   ) ;; company
-
-
 ;;<!-- 0250 lisp-mode -->
-;; (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
 
 ;;<!-- 0270 Python - PyEnv -->
@@ -95,18 +78,6 @@
 
 ;; <!-------------------------------- ⬇️  정리해야함 ------------------------ !>
 
-;; ;; I-search
-;; (setq search-highlight t
-;;       search-whitespace-regexp ".*?"
-;;       isearch-lax-whitespace t
-;;       isearch-regexp-lax-whitespace nil
-;;       isearch-lazy-highlight t
-;;       isearch-lazy-count t
-;;       lazy-count-prefix-format " (%s/%s) "
-;;       lazy-count-suffix-format nil
-;;       isearch-yank-on-move 'shift
-;;       isearch-allow-scroll 'unlimited)
-
 ;; dired
 (after! dired
   (setq dired-listing-switches "-aBhl  --group-directories-first"
@@ -133,31 +104,6 @@
 (add-hook! 'text-mode-hook #'+word-wrap-mode)
 (add-hook! 'javascript-mode-hook #'+word-wrap-mode)
 (add-hook! 'web-mode-hook #'+word-wrap-mode)
-
-
-;; pdf-view 설정
-(after! pdf-view
-  ;; open pdfs scaled to fit page
-  (setq-default pdf-view-display-size 'fit-width)
-  (add-hook! 'pdf-view-mode-hook (evil-colemak-basics-mode -1))
-  ;; automatically annotate highlights
-  (setq pdf-annot-activate-created-annotations t
-        pdf-view-resize-factor 1.1)
-  ;; faster motion
-  (map!
-   :map pdf-view-mode-map
-   :n "g g"          #'pdf-view-first-page
-   :n "G"            #'pdf-view-last-page
-   :n "N"            #'pdf-view-next-page-command
-   :n "E"            #'pdf-view-previous-page-command
-   :n "e"            #'evil-collection-pdf-view-previous-line-or-previous-page
-   :n "n"            #'evil-collection-pdf-view-next-line-or-next-page
-   :localleader
-   (:prefix "o"
-    (:prefix "n"
-     :desc "Insert" "i" 'org-noter-insert-note
-     ))
-   ))
 
 
 ;; (use-package! anki-editor

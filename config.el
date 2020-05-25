@@ -1,17 +1,17 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; 참조: https://github.com/jwiegley/use-package
-;;
+
 ;;<!-- 0000: doom specific settings -->
 (setq user-full-name "A.J"
       user-mail-address "andrwj@gmail.com")
 
-;; Noto Sans Font Download: https://www.google.com/get/noto/#/family/noto-sans-kore
+;; URL to download Noto Sans Font: https://www.google.com/get/noto/#/family/noto-sans-kore
 (if (display-graphic-p)
     (progn
       (setq doom-font (font-spec :family "Noto Sans Mono CJK KR" :size 18 )
             doom-variable-pitch-font (font-spec :family "Noto Sans Light" :size 18)
-            doom-unicode-font (font-spec :name "Noto Sans Mono CJK KR" :size 15)
+            doom-unicode-font (font-spec :name "Noto Sans Mono CJK KR" :size 18)
             doom-big-font (font-spec :name "Noto Sans Black" :size 35) ;; use this for presentations or streaming.
             doom-theme 'doom-one
             )
@@ -73,24 +73,8 @@
    )
   ))
 
-;; ;; ** Global Keybindings
-;; ;; Normal mode?
-;; (nmap
-;;  :prefix my-leader
-;;  "b d" #'kill-this-buffer
-;;  ;; kill things
-;;  "k" '(:ignore t :which-key "kill")
-;;  "k e" 'save-buffers-kill-terminal
-;;  "k b" 'my-kill-this-buffer
-;;  "k f" 'delete-frame
-;;  "k o f" 'delete-other-frames
-;;  "k o w" 'delete-other-windows
-;;  "a" 'helm-mini)
-;; ;; (my-leader-def 'normal 'override
-;; ;;   "a" 'org-agenda)
 
-
-;;<!--  0003: 모든 인덴트 설정 -->
+;;<!--  0003: 인덴트 설정 -->
 (defun andrwj/setup-indent-env (n)
   (interactive)
   (setq-default c-basic-offset n) ; java/c/c++
@@ -106,17 +90,35 @@
   )
 (andrwj/setup-indent-env 3)
 
+
 ;;<!-- 0004: No aggressive-indent, No Emacs Life! -->
 (use-package! aggressive-indent
-  :hook
-  (css-mode . aggressive-indent-mode)
-  (emacs-lisp-mode . aggressive-indent-mode)
-  (js-mode . aggressive-indent-mode)
   :config
-  (setq aggressive-indent-comments-too t)
-  (global-aggressive-indent-mode 1)
-  (add-to-list 'aggressive-indent-protected-commands 'comment-dwim)
-  (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+  (dolist (hook (list
+                 'emacs-lisp-mode-hook
+                 'lisp-interaction-mode-hook
+                 'lisp-mode-hook
+                 'java-mode-hook
+                 'sh-mode-hook
+                 'js2-mode-hook
+                 'js-mode-hook
+                 'html-mode-hook
+                 'css-mode-hook
+                 'go-mode-hook
+                 'slime-repl-mode-hook
+                 'cmake-mode-hook
+                 'web-mode-hook
+                 'typescript-mode-hook
+                 'rjsx-mode-hook
+                 ))
+    (add-hook hook (lambda () (aggressive-indent-mode 1))))
+
+  ;; Disable aggressive indent in some mode.
+  (dolist (hook (list
+                 'python-mode-hook
+                 ))
+    (add-hook hook (lambda () (aggressive-indent-mode -1))))
+
   ;; 들여쓰기가 출렁이는 것을 막음
   (add-to-list
    'aggressive-indent-dont-indent-if
@@ -124,6 +126,7 @@
          (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
                              (thing-at-point 'line)))))
   )
+
 
 ;;<!-- 0007: OSX Clipboard -->
 (if (eq system-type 'darwin)
@@ -141,17 +144,18 @@
 
 
 ;;<!-- 0008: 상태에 따른 커서 모양/색상 지정 (주의: iTerm2에서는 아래설정과 상관없이 해당 어플의 설정이 사용된다) -->
-(setq evil-default-cursor (quote (t "#750000"))
-      evil-visual-state-cursor '("#880000" box)
-      evil-normal-state-cursor '("#750000" box)
-      evil-insert-state-cursor '("#e2e222" bar)
-      )
+(if (display-graphic-p)
+    (setq evil-default-cursor (quote (t "#750000"))
+          evil-visual-state-cursor '("#880000" box)
+          evil-normal-state-cursor '("#750000" box)
+          evil-insert-state-cursor '("#e2e222" bar)
+          ))
 
 
 ;;<!-- 0009: 버퍼내/모든 파일에서 문자열 찾기 -->
 ;; 함수 이름 'helm-*-do-' 인 형태가 실시간 검색용
 
-;; 특정 위치내 모든 파일에 대해 바꾸기
+;; 특정 위치내 모든 파일에 대해 바꾸기 과정 (주의: in spacemacs)
 ;; helm-ag로 찾은 내용(버퍼) 안에서 바꾸기를 하면, 버퍼내 변경사항을 helm-ag가 모든 파일에 대해 적용되는 것임!
 ;; 1) helm-do-ag 실행
 ;; 2) 검색 범위 선정
@@ -308,7 +312,9 @@
     (define-key evil-normal-state-map (kbd "C-c [") 'prevous-buffer)
     (define-key evil-normal-state-map (kbd "C-c ]") 'next-buffer)
     ))
-(load! "+extras")
+
 (load! "+flycheck-inline")
-(load! "+lsp")
+(load! "+lsp-company")
+(load! "+magit")
+(load! "+extras")
 

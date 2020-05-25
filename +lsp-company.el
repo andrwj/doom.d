@@ -21,3 +21,20 @@
         "--stdio"))
 ;; ) ;; lsp-mode
 
+
+;;<!-- 0230 Company -->
+(after! company
+  (setq company-selection-wrap-around t
+        ;; do or don't automatically start completion after <idle time>
+        company-idle-delay 0.5
+        ;; at least 1 letters need to be there though
+        company-minimum-prefix-length 2
+        ;; show completion numbers for hotkeys
+        company-show-numbers t
+        ;; align annotations to the right
+        company-tooltip-align-annotations t
+        company-search-regexp-function #'company-search-flex-regexp)
+        company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
+                            company-echo-metadata-frontend)
+  )
+
