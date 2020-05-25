@@ -57,7 +57,7 @@
 (package! dockerfile-mode)
 (package! doom-snippets
   :recipe (:local-repo "~/.doom.d/snippets"
-           :files ("*.el" "snippets"))
+           :files ("index.el"))
   )
 (package! osx-clipboard)
 (package! helm-ag)
@@ -66,9 +66,5 @@
 (package! md4rd)
 (package! whitespace)
 (package! google-translate)
-(package! color)
-(package! flycheck)
 (package! flycheck-inline)
-(package! rjsx-mode)
-(package! typescript-mode)
 (package! undo-fu)

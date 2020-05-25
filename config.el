@@ -308,7 +308,7 @@
     (define-key evil-normal-state-map (kbd "C-c [") 'prevous-buffer)
     (define-key evil-normal-state-map (kbd "C-c ]") 'next-buffer)
     ))
-
+(load! "+extras")
 (load! "+flycheck-inline")
 (load! "+lsp")
 
