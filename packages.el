@@ -68,3 +68,5 @@
 (package! google-translate)
 (package! flycheck-inline)
 (package! undo-fu)
+;; (package! awesome-tab :recipe (:host github :repo "manateelazycat/awesome-tab" :files (:defaults "*")))
+
