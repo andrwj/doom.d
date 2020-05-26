@@ -256,7 +256,10 @@
 
 ;;<!-- 0038: ranger -->
 (after! ranger
-  ;;(ranger-override-dired-mode t)
+  ;; NOTE: init.el에서 (dired +ranger)로 설정하게되면 Timer Error - void function 'format-spec'오류 발생. M-x 검색 안됨
+  ;; Ranger can be used in a single window, without the preview or parent windows. This is called deer-mode, 
+  ;; To toggle between ranger and deer, press: zP.
+  (ranger-override-dired-mode t) 
   (setq ranger-show-hidden t) ;;show dot files
   (setq ranger-dont-show-binary t) ;; don't show binary
   (setq helm-descbinds-window-style 'same-window) ;; helm-descbinds 패키지와 같이 씀에 따라 생기는 문제 해결
