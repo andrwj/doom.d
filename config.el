@@ -407,6 +407,14 @@
        (centaur-tabs-get-group-name (current-buffer))))))
   ) ;; (use-package! centaur-tabs)
 
+;;<!-- 0040: which-key -->
+(after! which-key
+  :config
+  (setq which-key-show-early-on-C-h t) ;; Allow C-h to trigger which-key before it is done automatically
+  (setq which-key-idle-delay 0.3) ;; make sure which-key doesn't show normally but refreshes quickly after it is triggered.
+  (setq which-key-idle-secondary-delay 0.2)
+  )
+
 (load! "+flycheck-inline")
 (load! "+lsp-company")
 (load! "+magit")
