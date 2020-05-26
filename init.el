@@ -20,7 +20,7 @@
 
        :completion
        (company  +auto ) ; the ultimate code completion backend
-       (helm +everywhere +fuzzy +lsp)  ; the *other* search engine for love and life
+       (helm +everywhere +fuzzy +lsp +childframe)  ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;;ivy               ; a search engine for love and life
 
@@ -71,15 +71,15 @@
        vc                  ; version-control and Emacs, sitting in a tree
 
        :term
-       eshell            ; the elisp shell that works everywhere
+       eshell              ; the elisp shell that works everywhere
        ;;shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
        vterm               ; the best terminal emulation in Emacs
 
        :checkers
-       (syntax); tasing you for every semicolon you forget
+       syntax              ; tasing you for every semicolon you forget
        ;;spell             ; tasing you for misspelling mispelling
-       grammar             ; tasing grammar mistake every you make
+       ;;grammar           ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
@@ -90,7 +90,7 @@
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        gist                ; interacting with github gists
-       lookup              ; navigate your code and its documentation
+       (lookup +dictionary) ; navigate your code and its documentation
        (lsp +peek)
        macos               ; MacOS-specific commands
        magit               ; a git porcelain for Emacs

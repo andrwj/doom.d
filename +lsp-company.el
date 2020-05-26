@@ -23,7 +23,6 @@
         lsp-document-sync-method         nil
         lsp-auto-execute-action          nil
         lsp-eldoc-render-all             t
-        lsp-enable-completion-at-point   nil
         lsp-enable-xref                  t
         lsp-enable-indentation           t
         lsp-enable-on-type-formatting    t
