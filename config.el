@@ -1,5 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
+;; Emacs Manual: https://www.gnu.org/software/emacs/manual/html_node/emacs/
 ;; 참조: https://github.com/jwiegley/use-package
 
 ;;<!-- 0000: doom specific settings -->
