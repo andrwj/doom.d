@@ -408,6 +408,7 @@
   ) ;; (use-package! centaur-tabs)
 
 ;;<!-- 0040: which-key -->
+;;https://github.com/justbur/emacs-which-key
 (after! which-key
   :config
   (setq which-key-show-early-on-C-h t) ;; Allow C-h to trigger which-key before it is done automatically
