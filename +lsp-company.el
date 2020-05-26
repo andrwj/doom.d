@@ -12,7 +12,7 @@
 (setq lsp-enable-snippet nil)
 (setq lsp-enable-completion-at-point t)
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
-(setq lsp-idle-delay 0.5)
+(setq lsp-idle-delay 1.0)
 (setq lsp-prefer-capf t)
 ;;(add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact"))
 (setq lsp-eslint-server-command
@@ -26,15 +26,14 @@
 (after! company
   (setq company-selection-wrap-around t
         ;; do or don't automatically start completion after <idle time>
-        company-idle-delay 0.5
+        company-idle-delay 1
         ;; at least 1 letters need to be there though
         company-minimum-prefix-length 2
         ;; show completion numbers for hotkeys
         company-show-numbers t
         ;; align annotations to the right
         company-tooltip-align-annotations t
-        company-search-regexp-function #'company-search-flex-regexp)
+        company-search-regexp-function #'company-search-flex-regexp
         company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                             company-echo-metadata-frontend)
-  )
-
+        ))
