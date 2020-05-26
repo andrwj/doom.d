@@ -256,7 +256,7 @@
 
 ;;<!-- 0038: ranger -->
 (after! ranger
-  (ranger-override-dired-mode t)
+  ;;(ranger-override-dired-mode t)
   (setq ranger-show-hidden t) ;;show dot files
   (setq ranger-dont-show-binary t) ;; don't show binary
   (setq helm-descbinds-window-style 'same-window) ;; helm-descbinds 패키지와 같이 씀에 따라 생기는 문제 해결
