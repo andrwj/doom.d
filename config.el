@@ -320,4 +320,5 @@
 (load! "+lsp-company")
 (load! "+magit")
 (load! "+extras")
+(load! "+elfeed-feeds")
 ;; (load! "+awesome-tab")

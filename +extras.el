@@ -63,10 +63,6 @@
 (after! elfeed
   (global-set-key (kbd "C-x w") 'elfeed)
   (global-set-key (kbd "C-x W") 'elfeed-update)
-  (setq elfeed-feeds
-        '("https://www.reddit.com/r/emacs.rss")
-        '("https://www.reddit.com/r/WebAssembly.rss")
-        )
   )
 
 ;;<!-- twittering-mode -->
