@@ -70,3 +70,4 @@
 (package! undo-fu)
 (package! centaur-tabs)
 (package! elfeed-web)
+(package! expand-region)

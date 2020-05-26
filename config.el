@@ -25,6 +25,7 @@
 
 
 ;; <!-- 0002: 전역 키 설정 -->
+
 (map!
  (:leader
   (:prefix "b"
@@ -71,6 +72,7 @@
    ;; "rgb" 모듈이 아닌 이 설정파일에 포함된 기능
    :desc "rainbow-delimiters-mode" "R" 'rainbow-delimiters-mode
    )
+   :desc "expand region" "v" 'er/expand-region
   ))
 
 
@@ -415,6 +417,7 @@
   (setq which-key-idle-delay 0.3) ;; make sure which-key doesn't show normally but refreshes quickly after it is triggered.
   (setq which-key-idle-secondary-delay 0.2)
   )
+
 
 (load! "+flycheck-inline")
 (load! "+lsp-company")
