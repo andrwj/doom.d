@@ -108,7 +108,3 @@
                             company-echo-metadata-frontend)
         ))
 
-(use-package! company-box
-  :config
-  (add-hook 'company-mode-hook 'company-box-mode)
-  )
