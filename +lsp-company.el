@@ -107,3 +107,8 @@
         company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                             company-echo-metadata-frontend)
         ))
+
+(use-package! company-box
+  :config
+  (add-hook 'company-mode-hook 'company-box-mode)
+  )
