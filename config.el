@@ -310,7 +310,6 @@
 (use-package! centaur-tabs
   :hook
   (dashboard-mode . centaur-tabs-local-mode)
-  (dashboard-mode . centaur-tabs-local-mode)
   (term-mode . centaur-tabs-local-mode)
   (calendar-mode . centaur-tabs-local-mode)
   (org-agenda-mode . centaur-tabs-local-mode)
@@ -337,7 +336,7 @@
         centaur-tabs-close-button "x"
         centaur-tabs-set-modified-marker t
         ;;(setq centaur-tabs-modified-marker "*"
-        niquify-separator "/"
+        uniquify-separator "/"
         uniquify-buffer-name-style 'forward
         centaur-tabs-cycle-scope 'tabs)
   (centaur-tabs-mode t)
@@ -371,7 +370,6 @@
   ;; 버퍼 그룹
   (defun centaur-tabs-buffer-groups ()
     "`centaur-tabs-buffer-groups' control buffers' group rules.
-
     Group centaur-tabs with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
     All buffer name start with * will group to \"Emacs\".
     Other buffer group by `centaur-tabs-get-group-name' with project name."
