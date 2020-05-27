@@ -68,7 +68,7 @@
       ;; lsp-ui-sideline-show-code-actions   t
       lsp-ui-peek-always-show             nil
       lsp-ui-doc-max-height               50
-      lsp-ui-doc-max-width                150
+      lsp-ui-doc-max-width                250
       lsp-ui-doc-include-signature        t
    ))
 

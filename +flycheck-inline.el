@@ -49,3 +49,4 @@
                  ))
     (add-hook hook (lambda () (flycheck-inline-mode 1))))
   )
+

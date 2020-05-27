@@ -425,6 +425,12 @@
   (add-hook 'prog-mode-hook 'rainbow-mode)
   )
 
+
+;; TODO: flycheck + popup 
+(after! popup
+   (setq popup-tip-max-width     128)
+)
+
 (load! "+flycheck-inline")
 (load! "+lsp-company")
 (load! "+magit")
