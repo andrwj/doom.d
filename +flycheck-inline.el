@@ -28,6 +28,7 @@
 
 
 (use-package! flycheck-inline
+  :defer t
   :config
   (dolist (hook (list
                  'emacs-lisp-mode-hook

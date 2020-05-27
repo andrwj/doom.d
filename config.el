@@ -25,7 +25,6 @@
 
 
 ;; <!-- 0002: 전역 키 설정 -->
-
 (map!
  (:leader
   (:prefix "b"
@@ -72,7 +71,7 @@
    ;; "rgb" 모듈이 아닌 이 설정파일에 포함된 기능
    :desc "rainbow-delimiters-mode" "R" 'rainbow-delimiters-mode
    )
-   :desc "expand region" "v" 'er/expand-region
+  :desc "expand region" "v" 'er/expand-region
   ))
 
 
@@ -95,6 +94,7 @@
 
 ;;<!-- 0004: No aggressive-indent, No Emacs Life! -->
 (use-package! aggressive-indent
+  :defer t
   :config
   (dolist (hook (list
                  'emacs-lisp-mode-hook
@@ -257,11 +257,12 @@
 (evil-define-key 'insert term-raw-map (kbd "C-c <left>") 'evil-window-left)
 
 ;;<!-- 0038: ranger -->
+;; NOTE: ranger 패키지를 use-package! 로 읽어들이지 말것! Timer 오류가 나면서 M-x 검색 및 여러곳에서 오동작한다
 (after! ranger
   ;; NOTE: init.el에서 (dired +ranger)로 설정하게되면 Timer Error - void function 'format-spec'오류 발생. M-x 검색 안됨
   ;; Ranger can be used in a single window, without the preview or parent windows. This is called deer-mode,
   ;; To toggle between ranger and deer, press: zP.
-  (ranger-override-dired-mode nil)
+  (ranger-override-dired-mode t)
   (setq ranger-show-hidden t) ;;show dot files
   (setq ranger-dont-show-binary t) ;; don't show binary
   (setq helm-descbinds-window-style 'same-window) ;; helm-descbinds 패키지와 같이 씀에 따라 생기는 문제 해결
@@ -273,6 +274,7 @@
 
 ;;<!-- 0060:  Whitespace -->
 (use-package! whitespace
+  :defer t
   :config
   (progn
     ;; Make whitespace-mode with very basic background coloring for whitespaces.
@@ -308,6 +310,7 @@
 ;;<!-- 0039 -- Centaur-tabs -->
 ;;https://github.com/ema2159/centaur-tabs#installation
 (use-package! centaur-tabs
+  :defer t
   :hook
   (dashboard-mode . centaur-tabs-local-mode)
   (term-mode . centaur-tabs-local-mode)
@@ -321,8 +324,9 @@
   ("C-c t p" . centaur-tabs-group-by-projectile-project)
   ("C-c t g" . centaur-tabs-group-buffer-groups)
   (:map evil-normal-state-map
-	 ("g n" . centaur-tabs-forward)
-	 ("g p" . centaur-tabs-backward))
+    ("g t" . centaur-tabs-mode)
+    ("g n" . centaur-tabs-forward)
+    ("g p" . centaur-tabs-backward))
   :config
   (setq centaur-tabs-style "bar"
         centaur-tabs-height 45
@@ -405,7 +409,7 @@
        "OrgMode")
       (t
        (centaur-tabs-get-group-name (current-buffer))))))
-  ) ;; (use-package! centaur-tabs)
+  )
 
 ;;<!-- 0040: which-key -->
 ;;https://github.com/justbur/emacs-which-key
@@ -416,9 +420,13 @@
   (setq which-key-idle-secondary-delay 0.2)
   )
 
+(after! hl-line
+  (rainbow-mode +1)
+  (add-hook 'prog-mode-hook 'rainbow-mode)
+  )
 
 (load! "+flycheck-inline")
 (load! "+lsp-company")
 (load! "+magit")
 (load! "+extras")
-(load! "+elfeed-feeds")
+;; (load! "+elfeed-feeds")

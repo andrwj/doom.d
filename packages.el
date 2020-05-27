@@ -66,6 +66,7 @@
 (package! md4rd)
 (package! whitespace)
 (package! google-translate)
+(package! company-lsp)
 (package! flycheck-inline)
 (package! undo-fu)
 (package! centaur-tabs)

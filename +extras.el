@@ -1,7 +1,9 @@
 ;;<!-- 0105: w3m 웨브라우저 -->
 ;; https://github.com/emacs-w3m/emacs-w3m
 ;; brew install w3m
-(after! w3m
+(use-package! w3m
+  :defer t
+  :config
   (message "0105 -- w3m")
   )
 
@@ -52,7 +54,9 @@
 
 ;;<!-- undo-fu -->
 ;; https://gitlab.com/ideasman42/emacs-undo-fu
-(after! undo-fu
+(use-package! undo-fu
+  :defer t
+  :config
   (global-undo-tree-mode -1)
   (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
   (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
@@ -67,7 +71,9 @@
 
 ;;<!-- twittering-mode -->
 ;; brew install gnupg
-(after! twittering-mode
+(use-package! twittering-mode
+  :defer t
+  :config
   (setq twittering-use-master-password t)
   )
 
@@ -83,6 +89,7 @@
 
 ;; dired-narrow
 (use-package! dired-narrow
+  :defer t
   :commands (dired-narrow-fuzzy)
   :init
   (map! :map dired-mode-map
@@ -96,10 +103,26 @@
 ;;   )
 
 ;; Word-Wrap Mode
-(add-hook! 'markdown-mode-hook #'+word-wrap-mode)
-(add-hook! 'text-mode-hook #'+word-wrap-mode)
-(add-hook! 'javascript-mode-hook #'+word-wrap-mode)
-(add-hook! 'web-mode-hook #'+word-wrap-mode)
+
+(dolist (hook (list
+              'emacs-lisp-mode-hook
+              'lisp-interaction-mode-hook
+              'lisp-mode-hook
+              'java-mode-hook
+              'sh-mode-hook
+              'js2-mode-hook
+              'js-mode-hook
+              'html-mode-hook
+              'css-mode-hook
+              'go-mode-hook
+              'slime-repl-mode-hook
+              'cmake-mode-hook
+              'web-mode-hook
+              'typescript-mode-hook
+              'rjsx-mode-hook
+              ))
+ (add-hook! hook #'+word-wrap-mode))
+
 
 
 ;; (use-package! anki-editor
