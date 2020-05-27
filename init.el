@@ -20,7 +20,7 @@
 
        :completion
        (company  +auto ) ; the ultimate code completion backend
-       (helm +everywhere +fuzzy +lsp +childframe)  ; the *other* search engine for love and life
+       (helm +everywhere +fuzzy +lsp)  ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;;ivy               ; a search engine for love and life
 
@@ -91,7 +91,7 @@
        (eval +overlay)     ; run code, run (also, repls)
        gist                ; interacting with github gists
        (lookup +dictionary) ; navigate your code and its documentation
-       (lsp +peek)
+       lsp
        macos               ; MacOS-specific commands
        magit               ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
