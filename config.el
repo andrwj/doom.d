@@ -34,9 +34,9 @@
   ;; https://github.com/emacsorphanage/helm-ag
   (:prefix ("/" . "search")
    :desc "current buffer only" "b" #'helm-ag-this-file
-   :desc "all buffers" "B" #'helm-do-ag-buffers
-   :desc "files" "f" #'helm-do-ag
-   :desc "in project" "p" #'helm-do-ag-project-root
+   :desc "all buffers" "B" #'helm-ag-buffers
+   :desc "files" "f" #'helm-ag
+   :desc "in project" "p" #'helm-ag-project-root
    ) ;; "/"
 
   ;; https://github.com/Alexander-Miller/treemacs
