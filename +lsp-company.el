@@ -30,6 +30,8 @@
                                     "/Users/andrwj/.vscode-insiders/extensions/dbaeumer.vscode-eslint-2.1.5/server/out/eslintServer.js"
                                     "--stdio")
 
+        ;; lsp-mode사용시, 열려있지 않으면 프로젝트내에 모든 파일을 읽지 못하게 한다
+        lsp-intelephense-multi-root nil
         )
   (add-hook 'lsp-managed-mode-hook 'lsp-diagnostics-modeline-mode)
   )
