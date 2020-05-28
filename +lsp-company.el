@@ -32,6 +32,7 @@
 
         ;; lsp-mode사용시, 열려있지 않으면 프로젝트내에 모든 파일을 읽지 못하게 한다
         lsp-intelephense-multi-root nil
+        lsp-prefer-flymake nil
         )
   (add-hook 'lsp-managed-mode-hook 'lsp-diagnostics-modeline-mode)
   )
@@ -54,7 +55,9 @@
          (current-buffer))))))
 
 
-(after! lsp-ui
+(use-package! lsp-ui
+   :defer
+   :config
    (setq lsp-ui-doc-enable                nil
       lsp-ui-doc-position                 'at-point
       ;; lsp-ui-doc-header                   t
@@ -69,10 +72,20 @@
       ;; lsp-ui-sideline-ignore-duplicate    t
       ;; lsp-ui-sideline-show-code-actions   t
       lsp-ui-peek-always-show             nil
-      lsp-ui-doc-max-height               50
-      lsp-ui-doc-max-width                250
+
+      lsp-ui-doc-use-childframe t
+      lsp-ui-doc-position                 'bottom
       lsp-ui-doc-include-signature        t
-   ))
+      lsp-ui-sideline-enable              nil
+      lsp-ui-flycheck-enable               t
+      lsp-ui-flycheck-list-position       'right
+      lsp-ui-flycheck-live-reporting       t
+      lsp-ui-peek-enable t
+      lsp-ui-peek-list-width               80
+      lsp-ui-peek-peek-height              25
+   )
+   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+)
 
 
 (use-package! company-lsp
