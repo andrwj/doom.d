@@ -328,6 +328,9 @@
     ("g n" . centaur-tabs-forward)
     ("g p" . centaur-tabs-backward))
   :config
+  (centaur-tabs-mode t)
+  (centaur-tabs-change-fonts "Avenir Next Condensed" 220)
+  ;; (centaur-tabs-headline-match)
   (setq centaur-tabs-style "bar"
         centaur-tabs-height 45
         centaur-tabs-set-icons t
@@ -343,9 +346,6 @@
         uniquify-separator "/"
         uniquify-buffer-name-style 'forward
         centaur-tabs-cycle-scope 'tabs)
-  (centaur-tabs-mode t)
-  (centaur-tabs-headline-match)
-  (centaur-tabs-change-fonts "Avenir Next Condensed" 220)
 
   (if (display-graphic-p)
       (progn
@@ -409,6 +409,7 @@
        "OrgMode")
       (t
        (centaur-tabs-get-group-name (current-buffer))))))
+
   )
 
 ;;<!-- 0040: which-key -->
