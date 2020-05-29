@@ -432,8 +432,14 @@
    (setq popup-tip-max-width     128)
 )
 
+(use-package! vimrc-mode
+   :demand t
+   :config
+   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
+)
+
+
 (load! "+flycheck-inline")
 (load! "+lsp-company")
 (load! "+magit")
 (load! "+extras")
-;; (load! "+elfeed-feeds")
