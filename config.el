@@ -433,20 +433,20 @@
 )
 
 (use-package! vimrc-mode
-   :demand t
-   :config
-   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
-)
+  :demand t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
+  )
 
 
 ;;https://github.com/purcell/elisp-slime-nav
 ;;M-. -- jump to definition (LISP)
 ;;M-, -- back
 (use-package! elisp-slime-nav
-   :demand t
-   :config
-   (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
-     (add-hook hook 'elisp-slime-nav-mode)))
+  :demand t
+  :config
+  (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+    (add-hook hook 'elisp-slime-nav-mode)))
 
 
 (load! "+flycheck-inline")
