@@ -73,3 +73,4 @@
 (package! elfeed-web)
 (package! expand-region)
 (package! vimrc-mode)
+(package! elisp-slime-nav)

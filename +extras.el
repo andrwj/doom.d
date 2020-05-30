@@ -2,7 +2,7 @@
 ;; https://github.com/emacs-w3m/emacs-w3m
 ;; brew install w3m
 (use-package! w3m
-  :defer t
+  :demand t
   :config
   (message "0105 -- w3m")
   )
@@ -55,7 +55,7 @@
 ;;<!-- undo-fu -->
 ;; https://gitlab.com/ideasman42/emacs-undo-fu
 (use-package! undo-fu
-  :defer t
+  :demand t
   :config
   (global-undo-tree-mode -1)
   (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
@@ -71,11 +71,11 @@
 
 ;;<!-- twittering-mode -->
 ;; brew install gnupg
-(use-package! twittering-mode
-  :defer t
-  :config
-  (setq twittering-use-master-password t)
-  )
+; (use-package! twittering-mode
+;   :demand t
+;   :config
+;   (setq twittering-use-master-password t)
+;   )
 
 
 ;; <!-------------------------------- ⬇️  정리해야함 ------------------------ !>
@@ -89,7 +89,7 @@
 
 ;; dired-narrow
 (use-package! dired-narrow
-  :defer t
+  :demand t
   :commands (dired-narrow-fuzzy)
   :init
   (map! :map dired-mode-map

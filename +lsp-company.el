@@ -56,7 +56,7 @@
 
 
 (use-package! lsp-ui
-   :defer
+   :demand
    :config
    (setq lsp-ui-doc-enable                nil
       lsp-ui-doc-position                 'at-point
@@ -89,7 +89,7 @@
 
 
 (use-package! company-lsp
-  :defer t
+  :demand t
   :config
   (setq company-lsp-async               t
         company-lsp-enable-recompletion t

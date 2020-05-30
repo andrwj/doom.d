@@ -94,7 +94,7 @@
 
 ;;<!-- 0004: No aggressive-indent, No Emacs Life! -->
 (use-package! aggressive-indent
-  :defer t
+  :demand t
   :config
   (dolist (hook (list
                  'emacs-lisp-mode-hook
@@ -274,7 +274,7 @@
 
 ;;<!-- 0060:  Whitespace -->
 (use-package! whitespace
-  :defer t
+  :demand t
   :config
   (progn
     ;; Make whitespace-mode with very basic background coloring for whitespaces.
@@ -310,7 +310,7 @@
 ;;<!-- 0039 -- Centaur-tabs -->
 ;;https://github.com/ema2159/centaur-tabs#installation
 (use-package! centaur-tabs
-  :defer t
+  :demand t
   :hook
   (dashboard-mode . centaur-tabs-local-mode)
   (term-mode . centaur-tabs-local-mode)
@@ -437,6 +437,16 @@
    :config
    (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
 )
+
+
+;;https://github.com/purcell/elisp-slime-nav
+;;M-. -- jump to definition (LISP)
+;;M-, -- back
+(use-package! elisp-slime-nav
+   :demand t
+   :config
+   (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+     (add-hook hook 'elisp-slime-nav-mode)))
 
 
 (load! "+flycheck-inline")
