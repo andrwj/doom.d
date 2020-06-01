@@ -173,7 +173,7 @@
  '(helm-ag-use-agignore t)
  '(helm-ag-fuzzy-match t)
  '(helm-ag-use-grep-ignore-list t)
- '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+ '(helm-ag-base-command "ag -l --nocolor -U --ignore-dir .git --ignore-dir .log --ignore-dir node_modules --ignore-dir build --ignore '**.min.js' --ignore '**.min.*' ")
  '(helm-ag-command-option " -U --all-text")
  '(helm-ag-insert-at-point 'word)
  '(helm-ag-edit-save t)
