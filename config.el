@@ -375,6 +375,12 @@
    ;; '(centaur-tabs-selected ((t (:foreground "#ffffff" :background "#48A6EE"))))
    ;; '(centaur-tabs-selected-modified ((t (:background "#EF6C00"))))
    '(centaur-tabs-unselected ((t (:foreground "#999999" :background "#292C33"))))
+   ;;centaur-tabs-default
+   ;;centaur-tabs-selected
+   ;;centaur-tabs-unselected-modified
+   ;;centaur-tabs-active-bar-face
+   ;;centaur-tabs-modified-marker-selected
+   ;;entaur-tabs-modified-marker-unselected
    )
 
   ;; 버퍼 그룹
