@@ -173,8 +173,8 @@
  '(helm-ag-use-agignore t)
  '(helm-ag-fuzzy-match t)
  '(helm-ag-use-grep-ignore-list t)
- '(helm-ag-base-command "ag -l --nocolor -U --ignore-dir .git --ignore-dir .log --ignore-dir node_modules --ignore-dir build --ignore '**.min.js' --ignore '**.min.*' ")
- '(helm-ag-command-option " -U --all-text")
+ '(helm-ag-base-command "ag -l --nocolor -U --ignore-dir .git --ignore-dir .vscode --ignore-dir .log --ignore-dir node_modules --ignore-dir build --ignore '**.min.js' --ignore '**.min.*' ")
+ '(helm-ag-command-option nil)
  '(helm-ag-insert-at-point 'word)
  '(helm-ag-edit-save t)
  '(helm-ag-use-temp-buffer t)
@@ -324,25 +324,24 @@
   ("C-c t p" . centaur-tabs-group-by-projectile-project)
   ("C-c t g" . centaur-tabs-group-buffer-groups)
   (:map evil-normal-state-map
-    ("g t" . centaur-tabs-mode)
-    ("g n" . centaur-tabs-forward)
-    ("g p" . centaur-tabs-backward))
+   ("g t" . centaur-tabs-mode)
+   ("g n" . centaur-tabs-forward)
+   ("g p" . centaur-tabs-backward))
   :config
   (centaur-tabs-mode t)
   (centaur-tabs-change-fonts "Avenir Next Condensed" 220)
-  ;; (centaur-tabs-headline-match)
+  (centaur-tabs-headline-match)
   (setq centaur-tabs-style "bar"
-        centaur-tabs-height 45
+        centaur-tabs-height 32
         centaur-tabs-set-icons t
         centaur-tabs-gray-out-icons 'buffer
         ;; 'under' | 'over' 값은 탭 높이에 따라 표시여부가 달라진다
         centaur-tabs-set-bar 'left
-        ;;centaur-tabs-active-bar-face "#48A6EE"
         x-underline-at-descent-line t
         centaur-tabs-set-close-button nil
         centaur-tabs-close-button "x"
         centaur-tabs-set-modified-marker t
-        ;;(setq centaur-tabs-modified-marker "*"
+        centaur-tabs-modified-marker "*"
         uniquify-separator "/"
         uniquify-buffer-name-style 'forward
         centaur-tabs-cycle-scope 'tabs)
@@ -370,6 +369,13 @@
        (and (string-prefix-p "magit" name)
             (not (file-name-extension name)))
        )))
+
+  (custom-set-faces
+   ;; '(centaur-tabs-modified-marker-selected ((t (:foreground "#c62828"))))
+   ;; '(centaur-tabs-selected ((t (:foreground "#ffffff" :background "#48A6EE"))))
+   ;; '(centaur-tabs-selected-modified ((t (:background "#EF6C00"))))
+   '(centaur-tabs-unselected ((t (:foreground "#999999" :background "#292C33"))))
+   )
 
   ;; 버퍼 그룹
   (defun centaur-tabs-buffer-groups ()
@@ -442,11 +448,18 @@
 ;;https://github.com/purcell/elisp-slime-nav
 ;;M-. -- jump to definition (LISP)
 ;;M-, -- back
-(use-package! elisp-slime-nav
-  :demand t
-  :config
-  (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
-    (add-hook hook 'elisp-slime-nav-mode)))
+; (use-package! elisp-slime-nav
+;   :demand t
+;   :config
+;   (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+;     (add-hook hook 'elisp-slime-nav-mode)))
+
+
+;;
+(custom-set-faces
+ '(diff-hl-insert ((t (:background "forest green" :foreground "#9ac334"))))
+ '(diff-hl-change ((t (:background "slate blue" :foreground "medium purple"))))
+ '(diff-hl-delete ((t (:background "dark red" :foreground "#e74c3c")))))
 
 
 (load! "+flycheck-inline")

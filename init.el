@@ -107,8 +107,8 @@
        :lang
        ;;agda              ; types of types of types of types...
        ;;(cc +lsp)           ; C/C++/Obj-C madness
-       ;;(clojure +lsp)      ; java with a lisp
-       ;;(common-lisp  +lsp) ; if you've seen one lisp, you've seen them all
+       (clojure +lsp)      ; java with a lisp
+       (common-lisp  +lsp) ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
@@ -126,9 +126,9 @@
        ;;(haskell +dante)  ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
-       (json  +lsp)        ; At least it ain't XML
+       ;;(json  +lsp)        ; At least it ain't XML
        ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
-       (javascript  +lsp)  ; all(hope(abandon(ye(who(enter(here))))))
+       ;;(javascript  +lsp)  ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        ;;latex             ; writing papers in Emacs has never been so fun
@@ -148,7 +148,7 @@
        ;;python            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
-       rest              ; Emacs as a REST client
+       ;;rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        ;;(rust  +lsp)        ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
@@ -159,7 +159,7 @@
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
-       (web  +lsp)         ; the tubes
+       ;;(web  +lsp)         ; the tubes
        ;;yaml              ; JSON, but readable
 
        :email

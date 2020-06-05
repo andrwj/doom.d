@@ -1,6 +1,6 @@
-#+TITLE:  Doom Emacs Configuration
-#+DATE:    May 28, 2020
-#+SINCE:   <replace with next tagged release version>
-#+STARTUP: inlineimages nofold
 
-# (Doom) Emacs 설정에 대해 주의사항 및 여러 정보를 남기는 목적
+# Doom Emacs Configurations
+
+![screenshot](https://raw.githubusercontent.com/andrwj/doom.d/master/doom-emacs.png)
+
+
