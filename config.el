@@ -472,3 +472,4 @@
 (load! "+lsp-company")
 (load! "+magit")
 (load! "+extras")
+(load! "+4clojure")
